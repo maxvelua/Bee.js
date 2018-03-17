@@ -19,8 +19,16 @@ const userSchema = new Schema({ //name, pass, email, phone number;
         type: String,
         required: true,
     },
+    isEmailConfirmed: {
+        type: Boolean,
+        default: false
+    },
     phoneNumber: {
         type: String
+    },
+    isActive:{
+        type: Boolean,
+        default: true
     }
 });
 
