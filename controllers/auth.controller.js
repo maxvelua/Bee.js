@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const serverConfig = require("../config/server.config");
 const HttpError = require('../error');
 const userService = require("../services/user.service");
+const { validationResult } = require('express-validator/check');
 
  module.exports.authUser = async (req, res, next) => {
     const {login, pass} = req.body;
@@ -27,7 +28,15 @@ const userService = require("../services/user.service");
     const {pass, repeatPass} = req.body;
     const {token} = req.query;
 
-    if(pass !== repeatPass) throw new HttpError(402, 'Bad password');
+     const errors = validationResult(req);
+
+     if(!errors.isEmpty()){
+         console.log("errors");
+         throw new HttpError(442, JSON.stringify(errors.mapped()));
+     }
+
+
+   //  if(pass !== repeatPass) throw new HttpError(402, 'Bad password');
 
     const {email} = jwt.decode(token, serverConfig.jwt.secret);
 
