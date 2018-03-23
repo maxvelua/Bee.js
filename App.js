@@ -1,10 +1,11 @@
 const express = require('express')
 const app = express()
-const mongoose = require('./lib/mongoose.lib')
 const bodyParser = require('body-parser');
 const _ = require('lodash');
 const HttpError = require('./error');
 const logger = require('./services/logger.service');
+const sequelize = require('./lib/sequelize.lib');
+sequelize.connect();
 
 logger.info(`Process: ${process.cwd()}`);
 
@@ -36,30 +37,6 @@ async function errorHandler(err, req, res, next) {
 app.use(notFound);
 app.use(errorHandler);
 
+app.listen(3000, () => console.log('Example app listening on port 3000!'));
 
-//app.get('/', (req, res) => res.send('Hello World!'))
-// router.get('/dashboard', async (req, res, next) => {
-//     const myFunc = () => res.json('прости за опоздание');
-//     setTimeout(myFunc, 10000);
-//     // res.send('kek');
-// })
-// router.get('/dashboard', async (req, res, next) => {
-//     const myFunc = () => res.json('прости за опоздание');
-//     setTimeout(myFunc, 10000);
-//     // res.send('kek');
-// })
-
-// router.post('/user', async (req, res, next) => {
-//     console.log(req.body);
-//     const user = new UserModel(req.body);
-//     await user.save();
-//     res.json('saved');
-// })
-
-// routes.get('/register',  async (req, res, next) => {
-//     res.render('register', { });
-// });
-
-
-
-app.listen(6666, () => console.log('Example app listening on port 5555!'))
+module.exports = app;
