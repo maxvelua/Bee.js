@@ -1,6 +1,5 @@
 const jwtHelper = require("../helpers/jwt.helper")
 const nodemailer = require("nodemailer");
-const employeeEmail = '';
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
