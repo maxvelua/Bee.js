@@ -19,13 +19,13 @@ module.exports.createClient = async (req, res, next) => {
 
         const {user_id, email} = user; // take user email and id
 
-        const admin = await clientService.createClient(user_id, req.body); // create client
+        const client = await clientService.createClient(user_id, req.body); // create client
 
         const token = jwtHelper.createToken({user_id}); // create token
 
         await mailService.sendConfirmationEmail(token, email); // send confirmation email
 
-        res.json({user, admin});
+        res.json({user, client});
     } catch (err) {
         console.log(err);
         throw err;
