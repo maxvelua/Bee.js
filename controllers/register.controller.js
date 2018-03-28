@@ -13,7 +13,7 @@ module.exports.confirmEmail = async (req, res, next) => {
     const { token } = req.query;
     const {user_id} = jwtHelper.verifyToken(token);
 
-    const user = await  userService.updateUser(user_id, {is_email_confirmed: true});//UserModel.findOne({email: email, isEmailConfirmed: false});
+    const user = await userService.updateUser(user_id, {is_email_confirmed: true});//
 
     res.json(user);
 
