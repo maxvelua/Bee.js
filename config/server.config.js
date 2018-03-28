@@ -7,7 +7,8 @@ module.exports = {
     },
     db: {
         database: "bee",
-        username: "root",
+        username: "postgres",
+        password: "admin",
         host: "localhost",
         port: "5432",
         dialect: "postgres",

@@ -1,6 +1,10 @@
 const router = require('express-promise-router')();
-const contoroller = require('../controllers/auth.controller');
+const controller = require('../controllers/auth.controller');
 
-router.post('/', contoroller.login);
+router.post('/', controller.login);
+
+// login, pass
+// 1. findOne check pass(check hash)
+// 2. оддать session token
 
 module.exports = router;

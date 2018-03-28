@@ -1,7 +1,8 @@
 const router = require('express-promise-router')();
-const contoroller = require('../controllers/register.controller');
+const controller = require('../controllers/register.controller');
+const controllerAdmin = require('../controllers/admin.controller');
 
-router.get('/confirm', contoroller.confirmEmail);
-router.post('/forgot', contoroller.forgotPassword);
+router.get('/confirm-email', controller.confirmEmail);
+router.post('/forgot', controller.forgotPassword);
 
 module.exports = router;

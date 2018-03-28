@@ -4,8 +4,9 @@ const bodyParser = require('body-parser');
 const _ = require('lodash');
 const HttpError = require('./error');
 const logger = require('./services/logger.service');
-const sequelize = require('./lib/sequelize.lib');
-sequelize.connect();
+const Sequelize = require('./lib/sequelize.lib');
+const routes = require('./routes');
+Sequelize.connect();
 
 logger.info(`Process: ${process.cwd()}`);
 
@@ -14,7 +15,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(require('morgan')('combined', {stream: logger.stream}));
 
-const routes = require('./routes');
 routes(app);
 
 async function notFound(req, res, next) {
