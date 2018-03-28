@@ -19,13 +19,13 @@ module.exports.createEmployee = async (req, res, next) => {
 
         const {user_id, email} = user; // take user email and id
 
-        const admin = await employeeService.createEmployee(user_id, req.body); // create employee
+        const employee = await employeeService.createEmployee(user_id, req.body); // create employee
 
         const token = jwtHelper.createToken({user_id}); // create token
 
         await mailService.sendConfirmationEmail(token, email); // send confirmation email
 
-        res.json({user, admin});
+        res.json({user, employee});
     } catch (err) {
         console.log(err);
         throw err;
