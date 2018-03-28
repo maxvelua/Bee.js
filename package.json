@@ -9,6 +9,7 @@
   "author": "Poc228",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "latest",
     "express": "^4.16.3",
     "express-promise-router": "^3.0.1",
@@ -19,7 +20,10 @@
     "mongoose": "^5.0.9",
     "morgan": "^1.9.0",
     "nodemailer": "^4.6.3",
+    "pg": "^7.4.1",
+    "pg-hstore": "^2.3.2",
     "randomstring": "^1.1.5",
+    "sequelize": "^4.37.4",
     "winston": "^2.4.1",
     "xregexp": "^4.1.1"
   }
