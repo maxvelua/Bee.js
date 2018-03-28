@@ -1,6 +1,6 @@
 const router = require('express-promise-router')();
-const controller = require('../controllers/register.controller');
+const controller = require('../controllers/employee.controller');
 
-router.get('/' , controller.confirmEmail);
+router.post('/' , controller.createEmployee); // TODO registration for employee and client and comments for all your lines of code
 
 module.exports = router;

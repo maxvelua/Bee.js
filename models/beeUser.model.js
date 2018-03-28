@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         is_email_confirmed: {
             type: DataTypes.BOOLEAN,
-            field: 'isemailconfirmed'
+            field: 'is_email_confirmed'
         },
         login: {
             type: DataTypes.TEXT,
@@ -36,6 +36,8 @@ module.exports = (sequelize, DataTypes) => {
 
     BeeUser.associate = models => {
         BeeUser.hasOne(sequelize.model('bee_admin'), {foreignKey: 'user_id', targetKey: 'user_id'});
+        BeeUser.hasOne(sequelize.model('bee_employee'), {foreignKey: 'user_id', targetKey: 'user_id'});
+        BeeUser.hasOne(sequelize.model('bee_client'), {foreignKey: 'user_id', targetKey: 'user_id'});
     };
 
     BeeUser.prototype.toJSON = function () {

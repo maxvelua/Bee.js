@@ -1,6 +1,6 @@
 const router = require('express-promise-router')();
-const controller = require('../controllers/register.controller');
+const controller = require('../controllers/client.controller');
 
-router.get('/' , controller.confirmEmail);
+router.post('/' , controller.createClient);
 
 module.exports = router;
