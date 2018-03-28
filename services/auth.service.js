@@ -1,7 +1,7 @@
 const userService = require('../services/user.service');
 
 module.exports.login = async (loginOrEmail, pass) => {
-    const user = await userService.findWhere({
+    const user = await userService.findWhere({ // find where by login or email
         or: [
             {login: loginOrEmail},
             {email: loginOrEmail}

@@ -22,9 +22,9 @@ module.exports.checkPass = (user, passToCheck) => {
     return hashPass === user.pass_hash ? user : null; // found user with same hash and returned it
 };
 
-module.exports.updateUser = async (user_id, userData) => await BeeUserModel.update(userData, {where: {user_id}});
+module.exports.updateUser = async (user_id, userData) => await BeeUserModel.update(userData, {where: {user_id}}); // find user by id and update his data
 
-module.exports.findById = async (user_id, is_email_confirmed = true) => await BeeUserModel.findOne({where: {user_id}, is_email_confirmed});
+module.exports.findById = async (user_id, is_email_confirmed = true) => await BeeUserModel.findOne({where: {user_id}, is_email_confirmed}); // find user by id where email is confirmed
 
-module.exports.findWhere = async (where) => await BeeUserModel.findOne({where});
+module.exports.findWhere = async (where) => await BeeUserModel.findOne({where}); // find user by data
 
