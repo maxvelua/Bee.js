@@ -24,7 +24,7 @@ module.exports.changePassword = [
 ];
 
 module.exports.regUser = [
-    body('login').isLength({ min: 8 }).withMessage('Name cannot be empty'),
+    body('login').isLength({ min: 1 }).withMessage('Name cannot be empty'),
     body('pass').isLength({min: 8}).withMessage('pass must be min 8 characters')
     //body('email', 'Invalid email').isEmail().exists(),//withMessage('Invalid email'),
     //body('phoneNumber', 'Invalid phone number').matches(/\+\d{12,18}/).exists()//.withMessage('Invalid phone number')

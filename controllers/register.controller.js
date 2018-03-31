@@ -4,6 +4,9 @@ const { validationResult } = require('express-validator/check');
 const jwtHelper = require('../helpers/jwt.helper');
 const BeeUser = require('../models/beeUser.model');
 
+
+// TODO do forgotPassword
+
 module.exports.forgotPassword = async (req, res, next) => {
 
 };
