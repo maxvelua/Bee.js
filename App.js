@@ -37,6 +37,6 @@ async function errorHandler(err, req, res, next) {
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'));
+app.listen(process.env.PORT || 3000, () => console.log('Example app listening on port 3000!'));
 
 module.exports = app;

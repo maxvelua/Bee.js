@@ -6,5 +6,5 @@ module.exports = (app) => { // пусті роути неможна робити
     app.use('/employee', require('./employee.route'));
     app.use('/test', require('./test.route'));
     app.use('/user', require('./user.route'));
-    app.user('/', require('./root.route'));
+    app.use('/', require('./root.route'));
 };
