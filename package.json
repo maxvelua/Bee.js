@@ -7,8 +7,8 @@
     "node" : ">=9.6.1"
   },
   "scripts": {
-    "start": "node ./app.js",
-    "development": "nodemon ./app.js"
+    "start": "node App.js",
+    "development": "nodemon App.js"
   },
   "author": "Poc228",
   "license": "ISC",
