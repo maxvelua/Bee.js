@@ -36,7 +36,6 @@ module.exports.sendForgotEmail = async (token, email) => {
 };
 
 module.exports.sendRegEmployeeEmail = async (token, email, login, pass) => {
-    this.employeeEmail = email;
     const url = `http://localhost:3000/auth/employee?token=${token}`;
 
     const mailOptions = {
@@ -56,7 +55,7 @@ module.exports.sendChangePassEmployeeEmail = async (email) => {
     const mailOptions = {
         from: 'bnmdude@gmail.com', // sender address
         to: email, // list of receivers
-        subject: 'Pls change your passrowd after first authorization', // Subject line
+        subject: 'Pls change your password after first authorization', // Subject line
         html: `Please click to change your password : <a href="${url}">${url}</a>`// plain text body
     };
 

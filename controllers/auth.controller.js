@@ -1,5 +1,8 @@
 const authService = require('../services/auth.service');
 const jwtHelper = require('../helpers/jwt.helper');
+const emailService = require('../services/mail.service');
+const { validationResult } = require('express-validator/check');
+const HttpError = require('../error');
 
  module.exports.login = async (req, res, next) => {
     const {login, pass} = req.body;
@@ -8,4 +11,31 @@ const jwtHelper = require('../helpers/jwt.helper');
         const token = jwtHelper.createToken({user_id: user.user_id});
         res.json({user, token});
     } else res.json("Unauthorized")
+};
+
+module.exports.forgotPass = async (req, res, next) => {
+    const {email} = req.body;
+
+    console.log("GOt: " + email);
+
+    const token = await authService.forgotPassword(email);
+    await emailService.sendForgotEmail(token, email);
+
+    res.json({message: 'ok'});
+};
+
+module.exports.resetPass = async (req, res, next) => {
+    const {pass} = req.body;
+    const {token} = req.query;
+
+    console.log("TOKEN: " + token);
+
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        console.log("errors");
+        throw new HttpError(442, JSON.stringify(errors.mapped()));
+    }
+
+    const user = await authService.resetPassword(pass, token);
+    res.json("OK")
 };
