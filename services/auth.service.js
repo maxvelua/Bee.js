@@ -1,42 +1,40 @@
-const UserModel = require("../models/user.model");
-const crypto = require('crypto');
-const jwt = require("jsonwebtoken");
-const serverConfig = require("../config/server.config");
-const HttpError = require('../error');
+const userService = require('../services/user.service');
+const jwtHelper = require('../helpers/jwt.helper');
+const db = require('../lib/sequelize.lib').db;
 
-module.exports.checkUserPass = async(login , pass) => {
-    const user = await UserModel.findOne({$or: [{"email": login}, {"name": login}]});
-    if (!user) {
-        console.log("Sry, but we don't have you");
-        throw new Error('sosnooley');
-    }
-    if(!user.isEmailConfirmed){
-        console.log("Sry, you need to confirm your email");
-        throw new Error('sosnooley');
-    }
+module.exports.login = async (loginOrEmail, pass) => {
+    const user = await userService.findWhere({ // find where by login or email
+        or: [
+            {login: loginOrEmail},
+            {email: loginOrEmail}
+        ]
+    });
 
-    console.log(user);
-
-    const {passSalt, pass: userHash} = user;
-    const hashPass = crypto.pbkdf2Sync(pass, passSalt, 64, 128, 'sha512').toString('base64');
-
-    return hashPass === userHash;
+    return userService.checkPass(user, pass);
 };
 
-module.exports.forgotPass = async (email) => {
-    const user = await UserModel.findOne({email: email, isEmailConfirmed: false});
-    const token = jwt.sign({ email }, serverConfig.jwt.secret, serverConfig.jwt.options);
+module.exports.forgotPassword = async (email) => {
+    console.log("GOt: " + email);
+    const user = await userService.findWhere({email: email});
+    const user_id = user.user_id;
+    console.log("user_Id" + user_id);
+    const token = jwtHelper.createToken({user_id}); // createToken(); - invalid expiresIn option for string payload - must be createToken ({});
 
     if (user) {
-        console.log(user);
-        user.isActive = false;
+        console.log(user.email);
+        //user.isActive = false;
         await user.save;
         return token;
     } else {
         throw new HttpError(404, "User not found");
     }
-}
+};
 
-module.exports.checkPass = async (pass, repeatPass) => {
-
-}
+module.exports.resetPassword = async (pass, token) => {
+    const {user_id} = jwtHelper.verifyToken(token);
+    const {hashPass, passSalt} = await userService.hashPass(pass);
+    console.log("SALT: " + passSalt);
+    // const user = await userService.updateUser({email, isActive: false}, {pass: hashPass, passSalt, isActive: true});
+    const user = await userService.updateUser(user_id, {pass_hash: hashPass, pass_salt:passSalt});
+    await user.save;
+};

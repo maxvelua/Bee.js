@@ -6,6 +6,4 @@ class HttpError extends Error {
   }
 }
 
-// TODO add error handlers everywhere were it's need
-
 module.exports = HttpError;

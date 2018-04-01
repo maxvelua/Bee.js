@@ -1,9 +1,13 @@
 const router = require('express-promise-router')();
-const contoroller = require('../controllers/auth.controller');
-const authValidator = require("../validators/users.validator");
+const controller = require('../controllers/auth.controller');
+const authMiddleware = require('../middlewares/auth.middleware');
+const authValidator = require('../validators/user.validator');
 
-router.post('/', contoroller.authUser);
-router.post('/forgot', contoroller.forgotPass);
-router.post('/forgot/verify', authValidator.changePassword, contoroller.resetPass);
+router.post('/', controller.login); //authMiddleware.checkUserType,
+router.post('/forgot', controller.forgotPass);
+router.post('/forgot/verify', authValidator.changePassword, controller.resetPass);
+// login, pass
+// 1. findOne check pass(check hash)
+// 2. оддать session token
 
 module.exports = router;
