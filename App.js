@@ -8,8 +8,6 @@ const Sequelize = require('./lib/sequelize.lib');
 const routes = require('./routes');
 Sequelize.connect();
 
-// TODO create user rout GET /, add protected (auth.middleware) rout, add controller add user.controller (req.user), user.service, create function on user service that take user from db on his user_type (tables admin, emp, client)
-
 logger.info(`Process: ${process.cwd()}`);
 
 app.use(bodyParser.json());

@@ -2,8 +2,6 @@ const jwt = require('../helpers/jwt.helper');
 const userService = require('../services/user.service');
 const HttpError = require('../error');
 
-// TODO check user by user_id if he exist in db than go next , if not throw error
-
 module.exports = async (req, res, next) => {
     console.log("Get token: " + req.headers['authorization']);
     const token = req.headers['authorization']; // jwt = req.header.Authorization
