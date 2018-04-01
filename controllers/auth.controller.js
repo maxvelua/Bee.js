@@ -10,7 +10,7 @@ const HttpError = require('../error');
     if(user){
         const token = jwtHelper.createToken({user_id: user.user_id});
         res.json({user, token});
-    } else res.json("Unauthorized")
+    } else throw new HttpError(401, "Unauthorized");
 };
 
 module.exports.forgotPass = async (req, res, next) => {
@@ -37,5 +37,5 @@ module.exports.resetPass = async (req, res, next) => {
     }
 
     const user = await authService.resetPassword(pass, token);
-    res.json("OK")
+    res.json(user)
 };
