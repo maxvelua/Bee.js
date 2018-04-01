@@ -6,10 +6,10 @@ module.exports = {
         }
     },
     db: {
-        database: "bee",
-        username: "postgres",
-        password: "admin",
-        host: "localhost",
+        database: "tejvjvqj",
+        username: "tejvjvqj",
+        password: "pM8UT8dbgNC2kkPGSxbFbQdrGAZQq3dW",
+        host: "horton.elephantsql.com",
         port: "5432",
         dialect: "postgres",
         dialectOptions: {
