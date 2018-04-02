@@ -5,5 +5,5 @@ const userService = require('../services/user.service');
 module.exports.getUser = async (req, res, next) => {
     const {user_id, user_type} = req.user;
     const userData = await userService.getUserData(user_id, user_type);
-    res.json({user: {...req.user.toJSON(), ...userData.toJSON()}});
+    res.json({...req.user.toJSON(), ...userData.toJSON()});
 };
