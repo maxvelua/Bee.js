@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         email: {
             type: DataTypes.TEXT,
-            field: 'email'
+            field: 'email',
+            unique: true
         },
         is_email_confirmed: {
             type: DataTypes.BOOLEAN,
@@ -26,7 +27,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         login: {
             type: DataTypes.TEXT,
-            field: 'login'
+            field: 'login',
+            unique: true
         },
         user_type: {
             type: DataTypes.INTEGER,
