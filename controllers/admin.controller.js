@@ -11,7 +11,6 @@ module.exports.createAdmin = async (req, res, next) => {
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
-            console.log("errors");
             throw new HttpError(442, JSON.stringify(errors.mapped()));
         }
 
@@ -30,4 +29,4 @@ module.exports.createAdmin = async (req, res, next) => {
         console.log(err);
         throw err;
     }
-}
+};
