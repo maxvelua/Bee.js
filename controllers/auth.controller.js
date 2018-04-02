@@ -1,4 +1,5 @@
 const authService = require('../services/auth.service');
+const userService = require('../services/user.service');
 const jwtHelper = require('../helpers/jwt.helper');
 const emailService = require('../services/mail.service');
 const { validationResult } = require('express-validator/check');
@@ -7,9 +8,10 @@ const HttpError = require('../error');
  module.exports.login = async (req, res, next) => {
     const {login, pass} = req.body;
     const user = await authService.login(login, pass);
+    const userData = await userService.getUserData(user.user_id, user.user_type);
     if(user){
         const token = jwtHelper.createToken({user_id: user.user_id});
-        res.json({user, token});
+        res.json({user: {...user, ...userData}, token});
     } else throw new HttpError(401, "Unauthorized");
 };
 
