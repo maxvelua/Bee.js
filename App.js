@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
@@ -18,6 +19,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(require('morgan')('combined', {stream: logger.stream}));
 
 routes(app);
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 
 async function notFound(req, res, next) {
     next(new HttpError(404, 'Page not found'));
