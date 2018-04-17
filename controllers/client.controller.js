@@ -30,4 +30,4 @@ module.exports.createClient = async (req, res, next) => {
         console.log(err);
         throw err;
     }
-}
+};

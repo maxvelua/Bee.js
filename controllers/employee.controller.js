@@ -30,4 +30,4 @@ module.exports.createEmployee = async (req, res, next) => {
         console.log(err);
         throw err;
     }
-}
+};
