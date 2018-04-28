@@ -10,36 +10,40 @@ module.exports = (sequelize, DataTypes) => {
         },
         pass_salt: {
             type: DataTypes.TEXT,
-            field: 'pass_salt'
+            field: 'pass_salt',
+            required: true
         },
         pass_hash: {
             type: DataTypes.TEXT,
-            field: 'pass_hash'
+            field: 'pass_hash',
+            required: true
         },
         email: {
             type: DataTypes.TEXT,
             field: 'email',
-            unique: true
+            unique: true,
+            required: true
         },
         is_email_confirmed: {
             type: DataTypes.BOOLEAN,
-            field: 'is_email_confirmed'
+            field: 'is_email_confirmed',
+            required: true
         },
         login: {
             type: DataTypes.TEXT,
             field: 'login',
-            unique: true
+            unique: true,
+            required: true
         },
         user_type: {
             type: DataTypes.INTEGER,
-            field: 'user_type'
+            field: 'user_type',
+            required: true
         }
     });
 
     BeeUser.associate = models => {
-        BeeUser.hasOne(sequelize.model('bee_admin'), {foreignKey: 'user_id', targetKey: 'user_id'});
-        BeeUser.hasOne(sequelize.model('bee_employee'), {foreignKey: 'user_id', targetKey: 'user_id'});
-        BeeUser.hasOne(sequelize.model('bee_client'), {foreignKey: 'user_id', targetKey: 'user_id'});
+
     };
 
     BeeUser.prototype.toJSON = function () {

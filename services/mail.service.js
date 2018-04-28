@@ -22,6 +22,19 @@ module.exports.sendConfirmationEmail = async (token, email) => {
     await transporter.sendMail(mailOptions);
 };
 
+module.exports.sendChangeConfirmationEmail = async (token, email) => {
+    const url = `http://localhost:3000/api/register/change-email-confirm?token=${token}`;
+
+    const mailOptions = {
+        from: 'bnmdude@gmail.com', // sender address
+        to: email, // list of receivers
+        subject: 'Please confirm your email', // Subject line
+        html: `Please click this email to change your email address: <a href="${url}">${url}</a>`// plain text body
+    };
+
+    await transporter.sendMail(mailOptions);
+};
+
 module.exports.sendForgotEmail = async (token, email) => {
     const url = `http://localhost:3000/auth/forgot/verify?token=${token}`;
 

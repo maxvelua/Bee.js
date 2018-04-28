@@ -6,7 +6,7 @@ const locationRoute = require('../routes/catalog.routes/location.route');
 const numberOfFramesRoute = require('../routes/catalog.routes/numberOfFrames.route');
 const regionRoute = require('../routes/catalog.routes/region.routes');
 const speciesRoute = require('../routes/catalog.routes/species.route');
-const suppliersTypesSuppliersRoute = require('../routes/catalog.routes/suppliersTypesSuppliers.route');
+const suppliersRoute = require('./catalog.routes/suppliers.route');
 const typeOfBeehiveRoute = require('../routes/catalog.routes/typeOfBeehive.route');
 const typeOfFoodRoute = require('../routes/catalog.routes/typeOfFood.route');
 const typeOfMedicationRoute = require('../routes/catalog.routes/typeOfMedication.route');
@@ -19,11 +19,9 @@ router.use(locationRoute);
 router.use(numberOfFramesRoute);
 router.use(regionRoute);
 router.use(speciesRoute);
-router.use(suppliersTypesSuppliersRoute);
+router.use(suppliersRoute);
 router.use(typeOfBeehiveRoute);
 router.use(typeOfFoodRoute);
 router.use(typeOfMedicationRoute);
-
-
 
 module.exports = router;

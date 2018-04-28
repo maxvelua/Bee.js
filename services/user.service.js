@@ -1,10 +1,16 @@
 // adding all services and libs
 const crypto = require('crypto');
+const jwt = require("jsonwebtoken");
 const db = require('../lib/sequelize.lib').db;
 const BeeUserModel = db['bee_user'];
+const BeeAdminModel = db['bee_admin'];
+const BeeEmployeeModel = db['bee_employee'];
+const BeeClientModel = db['bee_client'];
 const adminService = require('./admin.service');
 const empService = require('./employee.service');
-const clientServcie = require('./client.service');
+const clientService = require('./client.service');
+const mailService = require('../services/mail.service');
+const jwtHelper = require('../helpers/jwt.helper');
 
 
 module.exports.createUser = async (userData) => {
@@ -28,6 +34,12 @@ module.exports.checkPass = (user, passToCheck) => {
 
 module.exports.updateUser = async (user_id, userData) => await BeeUserModel.update(userData, {where: {user_id}}); // find user by id and update his data
 
+module.exports.updateAdmin = async (user_id, userData) => await BeeAdminModel.update(userData, {where: {user_id}});
+
+module.exports.updateEmployee = async (user_id, userData) => await BeeEmployeeModel.update(userData, {where: {user_id}});
+
+module.exports.updateClient = async (user_id, userData) => await BeeClientModel.update(userData, {where: {user_id}});
+
 module.exports.findById = async (user_id, is_email_confirmed = true) => await BeeUserModel.findOne({
     where: {user_id},
     is_email_confirmed
@@ -44,5 +56,20 @@ module.exports.getUserData = async (user_id, user_type) => {
     else if (user_type === 2)
         return await empService.findById(user_id);
     else
-        return await clientServcie.findById(user_id);
+        return await clientService.findById(user_id);
+};
+
+module.exports.changeUserEmail = async (user_id, email) => {
+    const emailToken = jwtHelper.createToken({user_id, email});
+    console.log(email);
+    await mailService.sendChangeConfirmationEmail(emailToken, email);
+};
+
+module.exports.changeUserPass = async (user_id, pass) => {
+    const {passSalt, hashPass} = await this.hashPass(pass);
+    await this.updateUser(user_id, {pass_salt: passSalt, pass_hash: hashPass});
+};
+
+module.exports.updateAdminData = async (user_id, userData) => {
+    await this.updateAdmin(user_id, {name: userData.name, surname: userData.surname});
 };

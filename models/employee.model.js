@@ -8,13 +8,19 @@ module.exports = (sequelize, DataTypes) => {
         },
         name: {
             type: DataTypes.TEXT,
-            field: 'name'
+            field: 'name',
+            required: true
         },
         surname: {
             type: DataTypes.TEXT,
-            field: 'surname'
+            field: 'surname',
+            required: true
         },
     });
+
+    BeeEmployee.associate = models => {
+
+    };
 
     return BeeEmployee;
 };

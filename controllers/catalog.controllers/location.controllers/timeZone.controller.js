@@ -1,15 +1,5 @@
-module.exports.create = async (req, res, next) => {
-
-};
-
-module.exports.update = async (req, res, next) => {
-
-};
-
-module.exports.delete = async (req, res, next) => {
-
-};
+const timezones = require('../../../config/timezone');
 
 module.exports.get = async (req, res, next) => {
-
+    res.json(timezones);
 };

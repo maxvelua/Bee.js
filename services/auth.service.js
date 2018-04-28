@@ -38,3 +38,4 @@ module.exports.resetPassword = async (pass, token) => {
     const user = await userService.updateUser(user_id, {pass_hash: hashPass, pass_salt:passSalt});
     await user.save;
 };
+

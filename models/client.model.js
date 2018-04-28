@@ -8,26 +8,35 @@ module.exports = (sequelize, DataTypes) => {
         },
         name: {
             type: DataTypes.TEXT,
-            field: 'name'
+            field: 'name',
+            required: true
         },
         surname: {
             type: DataTypes.TEXT,
-            field: 'surname'
+            field: 'surname',
+            required: true
         },
         company_name: {
             type: DataTypes.TEXT,
-            field: 'company_name'
+            field: 'company_name',
+            required: true
         },
         company_address: {
             type: DataTypes.TEXT,
-            field: 'company_address'
+            field: 'company_address',
+            required: true
         },
         phone: {
             type: DataTypes.TEXT,
-            field: 'phone'
+            field: 'phone',
+            required: true
         }
 
     });
+
+    BeeClient.associate = models => {
+
+    };
 
     return BeeClient;
 };
