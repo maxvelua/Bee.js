@@ -8,13 +8,21 @@ module.exports = (sequelize, DataTypes) => {
         },
         name: {
             type: DataTypes.TEXT,
-            field: 'name'
+            field: 'name',
+            required: true
         },
         surname: {
             type: DataTypes.TEXT,
-            field: 'surname'
+            field: 'surname',
+            required: true
         },
     });
 
+    BeeAdmin.associate = models => {
+
+    };
+
     return BeeAdmin;
 };
+
+// TODO (DONE all are required) во всех блять, значит что нужно добавить not null (required) сука во всех таблицах в полях которые по любому дложны быть в системе (this is magic validation blet)!
